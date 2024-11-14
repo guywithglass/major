@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KRISHISETU</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="background"></div>
+
+  <div class="container">
+    <header class="animate__animated animate__fadeInDown">
+      <h1>KRISHISETU</h1>
+      <p>Real-time insights for better farming decisions</p>
+    </header>
+
+    <!-- Authentication Section -->
+    <section class="authentication" id="authentication">
+      <h2>Login</h2>
+      <div class="auth-image">
+        <img src="images/login-image.jpg" alt="Login Image">
+      </div>
+      <form id="login-form" onsubmit="event.preventDefault(); login();">
+        <label for="login-email">Email:</label>
+        <input type="email" id="login-email" required>
+        <label for="login-password">Password:</label>
+        <input type="password" id="login-password" required>
+        <button type="submit" class="primary-btn">Login</button>
+      </form>
+
+      <h2>Sign Up</h2>
+      <form id="signup-form" onsubmit="event.preventDefault(); signup();">
+        <label for="signup-name">Name:</label>
+        <input type="text" id="signup-name" required>
+        <label for="signup-email">Email:</label>
+        <input type="email" id="signup-email" required>
+        <label for="signup-password">Password:</label>
+        <input type="password" id="signup-password" required>
+        <button type="submit" class="primary-btn">Sign Up</button>
+      </form>
+      <div id="notification" class="notification"></div>
+    </section>
+
+    <section class="dashboard" id="dashboard" style="display: none;">
+      <div class="grid">
+        <div class="card animate__animated animate__zoomIn" id="price-trends">
+          <h2>Price Trends</h2>
+          <img src="images/crops.jpg" alt="Crops">
+          <canvas id="priceChart"></canvas>
+          <p id="live-price"></p>
+        </div>
+
+        <div class="card animate__animated animate__zoomIn" id="storage-info">
+          <h2>Storage Availability</h2>
+          <img src="images/storage.jpg" alt="Storage">
+          <p>Real-time data on nearby storage facilities.</p>
+          <button class="primary-btn" onclick="getStorageInfo()">Check Storage</button>
+          <div id="storage-output"></div>
+        </div>
+
+        <div class="card animate__animated animate__zoomIn" id="contract-farming">
+          <h2>Contract Farming Opportunities</h2>
+          <img src="images/contract.jpg" alt="Contract Farming">
+          <p>Find reliable buyers for long-term contracts.</p>
+          <button class="primary-btn" onclick="openContractModal()">View Contracts</button>
+          <div id="contract-list"></div>
+        </div>
+
+        <div class="card animate__animated animate__zoomIn" id="past-records">
+          <h2>Past Contracts</h2>
+          <img src="images/past-records.jpg" alt="Past Records">
+          <ul id="records-list"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contract Modal -->
+    <div id="contract-modal" class="modal animate__animated animate__fadeInUp">
+      <div class="modal-content">
+        <span class="close-btn" onclick="closeContractModal()">&times;</span>
+        <h2>Contract Farming Opportunities</h2>
+        <div id="contract-list-modal"></div>
+
+        <!-- Payment Section -->
+        <h3>Payment Options</h3>
+        <form id="payment-form">
+          <label for="payment-method">Choose a payment method:</label>
+          <select id="payment-method" required>
+            <option value="">Select payment method</option>
+            <option value="credit-card">Credit Card</option>
+            <option value="upi">UPI</option>
+            <option value="net-banking">Net Banking</option>
+          </select>
+          
+          <div id="payment-details" style="display: none;">
+            <label for="card-number">Card Number:</label>
+            <input type="text" id="card-number" placeholder="1234 5678 9012 3456" required>
+            <label for="expiry-date">Expiration Date:</label>
+            <input type="text" id="expiry-date" placeholder="MM/YY" required>
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" placeholder="123" required>
+          </div>
+
+          <button type="button" class="primary-btn" onclick="processPayment()">Pay Now</button>
+        </form>
+
+        <button class="primary-btn" onclick="closeContractModal()">Close</button>
+      </div>
+    </div>
+
+    <footer class="animate__animated animate__fadeInUp">
+      <p>&copy; 2024 Farmers' Market Dashboard. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
