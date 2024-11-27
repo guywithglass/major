@@ -1,0 +1,49 @@
+{% extends 'base.html' %} {% block title %}Product Dashboard |
+KRISHISETU{%endblock %} {% block content %} {% load static %}
+<section class="dashboard" id="dashboard">
+  <div class="grid">
+    <!-- Price Trends Card -->
+    <div class="card" id="price-trends">
+      <h2>Price Trends</h2>
+      <img src="{% static 'images/crops.jpg' %}" alt="Crops" />
+      <canvas id="priceChart"></canvas>
+      <p id="live-price"></p>
+    </div>
+
+    <!-- Storage Availability Card -->
+    <div class="card" id="storage-info">
+      <h2>Storage Availability</h2>
+      <img src="{% static 'images/storage.jpg' %}" alt="Storage" />
+      <p>Real-time data on nearby storage facilities.</p>
+      <button class="primary-btn" onclick="getStorageInfo()">
+        Check Storage
+      </button>
+      <div id="storage-output"></div>
+      <!-- Ensure id="storage-output" matches JS -->
+    </div>
+
+    <!-- Contract Farming Card -->
+
+    <div class="card" id="contract-farming">
+      <h2>Contract Farming Opportunities</h2>
+      <img src="{% static 'images/contract.jpg' %}" alt="Contract Farming" />
+      <p>Find reliable buyers for long-term contracts.</p>
+      <a herf="{% url 'contract_view' %}">
+        <button class="primary-btn">View Contracts</button>
+      </a>
+      <div id="contract-list"></div>
+      <!-- Ensure id="contract-list" matches JS -->
+    </div>
+
+    <!-- Past Contracts Card -->
+    <div class="card" id="past-records">
+      <h2>Past Contracts</h2>
+      <img src="{% static 'images/past-records.jpg' %}" alt="Past Records" />
+      <ul id="records-list"></ul>
+      <!-- Ensure id="records-list" matches JS -->
+    </div>
+  </div>
+</section>
+<script src="{% static 'js/script.js' %}"></script>
+
+{% endblock %}

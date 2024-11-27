@@ -1,0 +1,48 @@
+{% extends 'base.html' %} {% block title %} Contract View | KRISHISETU
+{%endblock %} {%block content %}
+
+<div>
+  <h2>All Contracts</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Crop</th>
+        <th>Payment</th>
+        <th>Message</th>
+        <th>Farmer Accepted</th>
+        <!-- Added column for farmer who accepted the contract -->
+        <th>Action</th>
+        <!-- Extra column for accept button -->
+      </tr>
+    </thead>
+    <tbody>
+      {% for contract in contracts %}
+      <tr>
+        <td>{{ contract.username }}</td>
+        <td>{{ contract.email }}</td>
+        <td>{{ contract.phone }}</td>
+        <td>{{ contract.crop }}</td>
+        <td>{{ contract.payment }}</td>
+        <td>{{ contract.message }}</td>
+        <td>
+          {% if contract.accepted %}
+          <!-- Show the name of the farmer who accepted the contract -->
+          {{ contract.accepted_by.username }} {% else %} No farmer has accepted
+          yet. {% endif %}
+        </td>
+        <td>
+          <form action="{% url 'accept_contract' contract.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-success">Accept</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

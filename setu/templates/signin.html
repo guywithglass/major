@@ -1,0 +1,21 @@
+{% extends 'base.html' %} {% block title %}Login | KRISHISETU{%endblock%}
+{%block content %}
+<section class="authentication">
+  <h2>Login</h2>
+  {% if messages %}
+            <ul class="messages" >
+                {% for message in messages %}
+                    <li{% if message.tags %} {% endif %} style="color: #f35525;">{{ message }}</li>
+                {% endfor %}
+            </ul>
+    {% endif %}
+  <form method="POST" action="{% url 'signin' %}">
+    {% csrf_token %}
+    <label for="login-username">Username:</label>
+    <input type="text" name="username" required />
+    <label for="login-password">Password:</label>
+    <input type="password" name="password" required />
+    <button type="submit" class="primary-btn">Login</button>
+  </form>
+</section>
+{% endblock %}

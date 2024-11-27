@@ -1,15 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KRISHISETU</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-</head>
+{% extends 'base.html' %} {% block title %}Home | KRISHISETU{% endblock %}
+{%block content %}
+{% load static %}
+
+<style>
+  /* Ensure that the body takes full height */
+  html, body {
+      height: 100%;
+      margin: 0;
+  }
+
+  /* Make the body a flex container with column direction */
+  body {
+      display: flex;
+      flex-direction: column;
+  }
+
+  /* Make the main content area flexible and take up available space */
+  .content {
+      flex: 1;
+  }
+
+  /* Style the footer */
+  footer {
+      background-color: #343a40;
+      color: white;
+      padding: 15px 0;
+      text-align: center;
+      width: 100%;
+      position: relative;
+      bottom: 0;
+  }
+
+  footer p {
+      margin: 0;
+  }
+</style>
+
 <body>
+  <div class="content">
   <div class="background"></div>
 
   <div class="container">
@@ -19,10 +47,10 @@
     </header>
 
     <!-- Authentication Section -->
-    <section class="authentication" id="authentication">
+    {% comment %} <section class="authentication" id="authentication">
       <h2>Login</h2>
       <div class="auth-image">
-        <img src="images/login-image.jpg" alt="Login Image">
+        <img src="{% static "images/login-image.jpg" %}" alt="Login Image">
       </div>
       <form id="login-form" onsubmit="event.preventDefault(); login();">
         <label for="login-email">Email:</label>
@@ -43,20 +71,20 @@
         <button type="submit" class="primary-btn">Sign Up</button>
       </form>
       <div id="notification" class="notification"></div>
-    </section>
+    </section> {% endcomment %}
 
     <section class="dashboard" id="dashboard" style="display: none;">
       <div class="grid">
         <div class="card animate__animated animate__zoomIn" id="price-trends">
           <h2>Price Trends</h2>
-          <img src="images/crops.jpg" alt="Crops">
+          <img src="{% static "images/crops.jpg" %}" alt="Crops">
           <canvas id="priceChart"></canvas>
           <p id="live-price"></p>
         </div>
 
         <div class="card animate__animated animate__zoomIn" id="storage-info">
           <h2>Storage Availability</h2>
-          <img src="images/storage.jpg" alt="Storage">
+          <img src="{% static "images/storage.jpg" %}" alt="Storage">
           <p>Real-time data on nearby storage facilities.</p>
           <button class="primary-btn" onclick="getStorageInfo()">Check Storage</button>
           <div id="storage-output"></div>
@@ -64,7 +92,7 @@
 
         <div class="card animate__animated animate__zoomIn" id="contract-farming">
           <h2>Contract Farming Opportunities</h2>
-          <img src="images/contract.jpg" alt="Contract Farming">
+          <img src="{% static "images/contract.jpg" %}" alt="Contract Farming">
           <p>Find reliable buyers for long-term contracts.</p>
           <button class="primary-btn" onclick="openContractModal()">View Contracts</button>
           <div id="contract-list"></div>
@@ -72,7 +100,7 @@
 
         <div class="card animate__animated animate__zoomIn" id="past-records">
           <h2>Past Contracts</h2>
-          <img src="images/past-records.jpg" alt="Past Records">
+          <img src="{% static "images/past-records.jpg" %}" alt="Past Records">
           <ul id="records-list"></ul>
         </div>
       </div>
@@ -95,7 +123,7 @@
             <option value="upi">UPI</option>
             <option value="net-banking">Net Banking</option>
           </select>
-          
+
           <div id="payment-details" style="display: none;">
             <label for="card-number">Card Number:</label>
             <input type="text" id="card-number" placeholder="1234 5678 9012 3456" required>
@@ -111,12 +139,15 @@
         <button class="primary-btn" onclick="closeContractModal()">Close</button>
       </div>
     </div>
+  </div>
+</div>
+</body>
 
     <footer class="animate__animated animate__fadeInUp">
       <p>&copy; 2024 Farmers' Market Dashboard. All rights reserved.</p>
     </footer>
-  </div>
 
-  <script src="script.js"></script>
-</body>
-</html>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{% static "js/script.js" %}"></script>
+{% endblock %}
